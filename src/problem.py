@@ -1,5 +1,7 @@
 # src/problem.py 
 
+import random
+
 class Problem:
     """
     Objeto de la clase problema que contiene diversos atributos y métodos útiles a la hora de implementar las búsquedas heurísticas
@@ -79,3 +81,14 @@ class Problem:
             suma_nota = suma_nota + (100 - ( suma_presupuesto * 100 / self.max_presupuesto))
 
         return suma_nota
+
+    def get_random_player(self):
+        """
+        Devuelve un jugador aleatorio de toda la lista de jugadores
+
+        Returns:
+            Un diccionario que representa al jugador elegido
+        """
+        id = self.random.randint(0, self.max_players - 1)
+
+        return self.players[id]
