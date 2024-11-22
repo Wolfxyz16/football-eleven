@@ -1,9 +1,14 @@
 # src/solution-generator.py
+
 from solution import Solution 
 
 class SolutionGenerator():
     """
     Clase que se encarga de almacenar los distintos métodos de generación de soluciones
+
+    Métodos:
+        random_solution(problem):       Devuelve una solución de 11 jugadores aleatorios
+        baseline_solution(problem):     Intenta construir una solución decente y la devuelve
 
     """
     def __init_(self):
@@ -33,7 +38,7 @@ class SolutionGenerator():
 
         return solution
     
-    def baseline_solution(problem):
+    def baseline_solution(self, problem):
         """
         Genera una solución de once jugadores respetando que haya un único portero, que la formación sea válida y que no se pase del presupuesto
 
@@ -74,6 +79,8 @@ class SolutionGenerator():
                 contador_posiciones[player_position] += 1
                 solution.append(player)
                 posicion_anterior = player_position
+        
+        value = problem.objective_function(solution)
 
-        return solution
+        return Solution(solution, value)
 
