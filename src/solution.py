@@ -12,7 +12,8 @@ class Solution:
         cost (int): Indica cuánto dinero (€) cuesta la plantilla.
 
     Métodos:
-        print (players): Imprime en forma de tabla la solución.
+        print():            Imprime en forma de tabla la solución.
+        short_print():      Imprime en forma comprimida
     """
 
     def __init__(self, lineup, value):
@@ -39,7 +40,7 @@ class Solution:
 
         orden = ['G', 'D', 'M', 'F']
 
-        solution = sorted(self.lineup, key = lambda x: orden.index(self.lineup[x]['position']))
+        solution = sorted(self.lineup, key = lambda x: orden.index(x['position']))
 
         formacion = {'G': 0, 'D': 0, 'M': 0, 'F': 0}
 
@@ -49,7 +50,7 @@ class Solution:
         print(f"| {'NOMBRE':^30} | {'NOTA':^4} | {'POS':^3} | {'PRECIO € ':^15} | {'EQUIPO':^20} |")
         print('-' * 88)
 
-        for player in self.lineup:
+        for player in solution:
             coste += player["value"]
             nota += player["rating"]
             formacion[player["position"]] += 1
@@ -57,7 +58,20 @@ class Solution:
 
         print('-' * 88)
         print(f'Coste total de la plantilla {self.cost:,} €')
-        print(f'Media de la plantilla {self.rating_mean, 2}')
-        print(f'VALOR de la plantilla {self.value, 2}')
+        print(f'Media de la plantilla {round(self.rating_mean, 2)}')
+        print(f'VALOR de la plantilla {round(self.value, 2)}')
         print(f'Formación: {formacion["D"]}-{formacion["M"]}-{formacion["F"]}  \n')
 
+    def short_print(self):
+        """
+        Imprime de manera comprimida para mostrar solo los id y la función objetivo
+        """
+        
+        print("[ ", end = '')
+
+        for player in self.lineup:
+            print(player['id'], end = " ")
+
+        print(']')
+
+        print(f"value: {round(self.value, 2)}")
