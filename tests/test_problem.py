@@ -2,13 +2,13 @@
 
 import src.problem
 
-# Simulamos datos para hacer los tests, deberiamos poner once jugadores aquí
+# Simulamos datos para hacer los tests
 test_players = [
 
-Coste total de la plantilla 63,259,999 €
-Media de la plantilla 6.93
-VALOR de la plantilla 76.25
-Formación: 4-3-3  
+    # Coste total de la plantilla 63,259,999 €
+    # Media de la plantilla 6.93
+    # VALOR de la plantilla 76.25
+    # Formación: 4-3-3  
 
     {'id': 18, 'name': 'inaki-pena', 'team': 'barcelona', 'rating': 6.64, 'position': 'G', 'value': 7300000}
     {'id': 175, 'name': 'julian-araujo', 'team': 'las-palmas', 'rating': 6.99, 'position': 'D', 'value': 8199999}
