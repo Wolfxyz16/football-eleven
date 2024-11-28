@@ -11,9 +11,6 @@ class SolutionGenerator():
         baseline_solution(problem):     Intenta construir una solución decente y la devuelve
 
     """
-    def __init_(self):
-        pass
-
     def random_solution(self, problem):
         """
         Dados unos datos de los jugadores, devuelve una solución de 11 jugadores aleatorios
