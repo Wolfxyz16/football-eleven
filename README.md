@@ -50,9 +50,9 @@ La función objetivo busca **maximizar** el rendimiento (rating) de un equipo de
 
 ### Presupuesto y nota acumulados:
 
-$ suma presupuesto = \sum_{i \in S} V_i $
+$suma presupuesto = \sum_{i \in S} V_i$
 
-$ suma_nota = \sum_{i \in S} R_i $
+$suma_nota = \sum_{i \in S} R_i$
 
 ### Penalizaciones:
 
