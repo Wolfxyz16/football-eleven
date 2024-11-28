@@ -34,12 +34,12 @@ La función objetivo busca **maximizar** el rendimiento (rating) de un equipo de
 
 ### Conjuntos y variables:
 
-- `S`: Conjunto de IDs de los jugadores seleccionados. Es la solución que buscamos optimizar.
-- `players[i]`: Información del jugador $i$ (posición, valor, nota).
-- `P_i`: Posición del jugador $i$.
-- `V_i`: Coste del jugador $i$ (value).
-- `R_i`: Rating del jugador $i$ (rating).
-- `max_presupuesto`: Presupuesto máximo disponible.
+ `S`: Conjunto de IDs de los jugadores seleccionados. Es la solución que buscamos optimizar.
+ `players[i]`: Información del jugador $i$ (posición, valor, nota).
+ `P_i`: Posición del jugador $i$.
+ `V_i`: Coste del jugador $i$ (value).
+ `R_i`: Rating del jugador $i$ (rating).
+ `max_presupuesto`: Presupuesto máximo disponible.
 
 ### Contadores de posiciones:
 
@@ -51,6 +51,7 @@ La función objetivo busca **maximizar** el rendimiento (rating) de un equipo de
 ### Presupuesto y nota acumulados:
 
 > $ suma presupuesto = \sum_{i \in S} V_i $
+
 > $ suma_nota = \sum_{i \in S} R_i $
 
 ### Penalizaciones:
