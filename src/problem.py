@@ -1,18 +1,19 @@
 # src/problem.py 
 
-import random
-
 class Problem:
     """
     Objeto de la clase problema que contiene diversos atributos y métodos útiles a la hora de implementar las búsquedas heurísticas
 
     Atributos:
-        players (list): contiene los jugadores con sus estadísticas
+        players (list):                 Contiene los jugadores con sus estadísticas
 
     Métodos:
-        objective_function(solucion): Dada una solución devuelve el valor que le da.
+        read_players(filename):         Lee el archivo con el nombre filename y carga los jugadores
+        objective_function(solucion):   Dada una solución devuelve el valor que le da.
+        get_random_player():            Devuelve un jugador aleatorio de su base de jugadores
     """
 
+    import random
     import pandas as pd
     
     def __init__(self, filename):
@@ -89,6 +90,10 @@ class Problem:
         Returns:
             Un diccionario que representa al jugador elegido
         """
-        id = self.random.randint(0, self.max_players - 1)
+
+        # Comprobamos que existan jugadores
+        if len(self.players) == 0: return;
+
+        id = self.random.randint(0, self.total_players - 1)
 
         return self.players[id]
