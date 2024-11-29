@@ -5,15 +5,16 @@ class Solution:
     Clase Solution que representa una alineación de once jugadores. La solución debe de tener un valor de la función objetivo.
 
     Atributos:
-        lineup (list): Lista de diccionarios con once jugadores pertenecientes a la alineacion
-        value (int): Valor que le da la función objetivo.
-        rating_sum (int): Suma de las notas de la alineación.
-        rating_mean (float): Media de las notas de la alineación.
-        cost (int): Indica cuánto dinero (€) cuesta la plantilla.
+        lineup (list):          Lista de diccionarios con once jugadores pertenecientes a la alineacion
+        value (int):            Valor que le da la función objetivo.
+        rating_sum (int):       Suma de las notas de la alineación.
+        rating_mean (float):    Media de las notas de la alineación.
+        cost (int):             Indica cuánto dinero (€) cuesta la plantilla.
 
     Métodos:
         print():            Imprime en forma de tabla la solución.
         short_print():      Imprime en forma comprimida
+        change_players(current_player, new_player):   Recibe un jugador de la solución y lo cambia por el nuevo jugador.
     """
 
     def __init__(self, lineup, value):
@@ -28,6 +29,13 @@ class Solution:
             self.cost += player["value"]
 
         self.rating_mean = self.rating_sum / 11
+
+    def change_players(current_player, new_player):
+        """
+             
+        """
+        pass
+
 
     def print(self):
         """
