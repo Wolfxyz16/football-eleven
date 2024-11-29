@@ -36,7 +36,7 @@ class Problem:
             players-premier-2324.csv
             players-reduced-premier-2324.csv
         """
-        df = self.pd.read_csv(f"data/{filename}")
+        df = self.pd.read_csv(f"../data/{filename}")
         self.players = df.to_dict(orient = "records")
 
     def objective_function(self, solucion):
@@ -89,6 +89,6 @@ class Problem:
         Returns:
             Un diccionario que representa al jugador elegido
         """
-        id = self.random.randint(0, self.max_players - 1)
+        id = random.randint(0, self.total_players - 1)
 
         return self.players[id]
