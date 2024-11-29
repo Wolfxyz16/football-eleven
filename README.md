@@ -17,17 +17,19 @@ Este proyecto se trata de crear alineaciones de 11 jugadores de fútbol dado un 
 │   ├── players-reduced-2324.csv
 │   └── players-reduced-laliga-2324.csv
 ├── README.md
-├── TODO.md
 ├── src
+│   ├── genetic
+│   │   └── genetic.py
+│   ├── local_search
+│   │   ├── neighbourhood_generator.py
+│   │   └── neighbourhood.py
 │   ├── main.py
-│   ├── neighbourhood.py
-│   ├── neighbourhood_generator.py
 │   ├── problem.py
 │   ├── solution_generator.py
 │   └── solution.py
-└── tests
-    ├── test_problem.py
-    └── test.py
+└─── tests
+    ├── test_problem.py
+    └── test.py
 ```
 
 Dentro de la carpeta `tests` se encuentran los tests que aseguran el correcto funcionamiento del proyecto. Cada archivo de test asegura una funcionalidad concreta del proyecto estando está indicada en su nombre. Por ejemplo, el archivo `test_problem.py` se encarga de asegurar la funcionalidad de la clase `Problem` que se encuentra en el archivo `src/problem.py`. Para hacer una comprobación del funcionamiento general del proyecto ejecutar el archivo `test.py`.
