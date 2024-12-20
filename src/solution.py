@@ -1,4 +1,5 @@
 # src/solution.py
+import random
 
 class Solution:
     """
@@ -12,9 +13,10 @@ class Solution:
         cost (int):             Indica cuánto dinero (€) cuesta la plantilla.
 
     Métodos:
-        print():            Imprime en forma de tabla la solución.
-        short_print():      Imprime en forma comprimida
-        change_players(current_player, new_player):   Recibe un jugador de la solución y lo cambia por el nuevo jugador.
+        change_players(current_player, new_player):     Recibe un jugador de la solución y lo cambia por el nuevo jugador.
+        get_random_player():                            Devuelve un jugador aleatorio de la alineación
+        print():                                        Imprime de forma de tabla la solución.
+        short_print():                                  Imprime de forma comprimida
     """
 
     def __init__(self, lineup, value):
@@ -30,11 +32,25 @@ class Solution:
 
         self.rating_mean = self.rating_sum / 11
 
-    def change_players(current_player, new_player):
+    def change_players(self, current_player, new_player):
         """
-             
+        Recorre la lista hasta encontrar el current_player y lo intercambia por el nuevo
+
+        Args:
+            current_player  (dict): Jugador actual que debe de estar en la solucion
+            new_player      (dict): Jugador que va a entrar en la solucion
         """
-        pass
+        for player in self.lineup:
+            if player['id'] == current_player['id']:
+                player = new_player
+                return 0
+        raise Exception(f"{current_player.name} is not in the squad.")
+
+    def get_random_player(self):
+        """
+        Devuelve un jugador (dict) aleatorio de la solución
+        """
+        return random.choice(self.lineup)
 
 
     def print(self):
@@ -83,3 +99,6 @@ class Solution:
         print(']')
 
         print(f"value: {round(self.value, 2)}")
+
+    def __gt__(self, other):
+        return self.value > other.value

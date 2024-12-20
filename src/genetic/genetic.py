@@ -1,24 +1,24 @@
 # src/genetic/genetic.py
 
-from src.population import Population
-from src.problem import Problem
 import heapq
 import random
+from population import Population
+from solution import Solution
 
 # Constantes
-MAX_POPULATION = 10
+MAX_POPULATION = 10000
 MUTANT_PROB = 0.1
 
 def truncation_selection(pop, threshold):
     """
     Se eligen los k mejores individuos de la poblacion. Se devuelven los índices de los individuos seleccionados
     """
-    assert is_instance(threshold, int) and threshold >= 0
+    assert isinstance(threshold, int) and threshold >= 0
     return heapq.nlargest(threshold, pop.solutions)
     
 def one_point_crossover(lineup1, lineup2, problem):
     """
-    Devuelve dos hijos aplicando el one-point crossover. Necesitamos el objetivo problem para evaluar a las soluciones hijas
+    Devuelve dos hijos (objetos solution) aplicando el one-point crossover. Necesitamos el objeto problem para evaluar a las soluciones hijas
     que creamos.
 
     Se podría mejorar este crossover para que tuviese en cuenta por lo menos el mantener una buena estructura del equipo o mantener un portero
@@ -35,48 +35,41 @@ def one_point_crossover(lineup1, lineup2, problem):
 
 def manager_crossover(lineup1, lineup2, problem):
     """
+    [TODO]
     Crea (una or dos) solucion(es) intentando mantener un mínimo de sentido a la hora de generar los hijos
     """
     pass
 
-
-def mutate(lineup1):
-    pass
-
-def genetic_algorithm(problem, sol_gen):
-
+def genetic_algorithm(problem, sol_gen, gen = 100000):
+    import heapq
+    import random
     # Creamos una poblacion inicial y las evaluamos
     pop = Population()
     pop.initialize_random(problem, sol_gen, MAX_POPULATION)
 
-    # Criterio de seleccion
-    int(threshold) = MAX_POPULATION * 0.1
-    pop_selected = truncation_selection(pop, threshold)
+    for _ in range(gen):
+        # Criterio de seleccion
+        threshold = int(MAX_POPULATION * 0.1)
+        pop_selected = truncation_selection(pop, threshold)
 
-    # Cruce y mutacion
-    for i in range(0, len(pop_selected), 2):
-        offspring1, offspring2 = one_point_crossover(pop_selected[i].lineup, pop_selected[i+1].lineup)
+        # Creamos una poblacion de hijos
+        offsprings = Population(max_population = threshold * 2)
 
-        # Lanzamos un dado para ver si tenemos que mutar
-        if random.random() > MUTANT_PROB:
-            mutate()
+        # Cruce y mutacion
+        for parent1, parent2 in zip(pop_selected[::2], pop_selected[1::2]):
+            offspring1, offspring2 = one_point_crossover(parent1.lineup, parent2.lineup, problem)
 
+            # Lanzamos un dado para ver si tenemos que mutar
+            if random.random() > MUTANT_PROB:
+                problem.mutate_same_position_solution(offspring1)
+                problem.mutate_same_position_solution(offspring2)
 
-    # Reemplazo
-    
-    # iteramos hasta un criterio
-    while True:
-    
-        # Cruzamos los hijos
-        while hijos < 10:
-            # 1. Seleccionamos a dos padres
-            # 2. Aplicamos el cruce
-            # 3. Aplicamos la mutación
-            # 4. Insertamos los nuevos hijos en la poblacion
-            pass
+            offsprings.add_solution(offspring1)
+            offsprings.add_solution(offspring2)
 
-        # Evaluamos la nueva poblacion
+        # Reemplazo, elegimos las mejores soluciones entre padres e hijos
+        comb = pop.solutions + offsprings.solutions
+        pop.solutions = heapq.nlargest(MAX_POPULATION, comb)
 
-        # Seleccionamos la mejor poblacion
-
-        # Devolvemos el mejor individuo
+    print(pop)
+    return pop.best_solution()

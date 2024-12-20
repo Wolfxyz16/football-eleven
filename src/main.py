@@ -3,7 +3,9 @@ import time
 from problem import Problem
 from solution import Solution 
 from solution_generator import SolutionGenerator
+from genetic.genetic import genetic_algorithm
 
+# TODO: mover este método a otro archivo src/utils.py
 def perfomance(problem, sg):
     max = 100000
     # Random solution
@@ -38,8 +40,34 @@ def perfomance(problem, sg):
     print(f"Tiempo transcurrido: {round(tiempo_transcurrido, 2)} seconds")
     print(f"Calidad media de las soluciones: {round(suma / max, 2)}\n")
 
+
+greeting = """
+███████  ██████   ██████  ████████ ██████   █████  ██      ██          ███████ ██      ███████ ██    ██ ███████ ███    ██ 
+██      ██    ██ ██    ██    ██    ██   ██ ██   ██ ██      ██          ██      ██      ██      ██    ██ ██      ████   ██ 
+█████   ██    ██ ██    ██    ██    ██████  ███████ ██      ██          █████   ██      █████   ██    ██ █████   ██ ██  ██ 
+██      ██    ██ ██    ██    ██    ██   ██ ██   ██ ██      ██          ██      ██      ██       ██  ██  ██      ██  ██ ██ 
+██       ██████   ██████     ██    ██████  ██   ██ ███████ ███████     ███████ ███████ ███████   ████   ███████ ██   ████ 
+"""
+
+draw = """
+  ___________________________
+ |             |             |
+ |___          |          ___|
+ |_  |         |         |  _|
+.| | |.       ,|.       .| | |.
+|| | | )     ( | )     ( | | ||
+'|_| |'       `|'       `| |_|'
+ |___|         |         |___|
+ |             |             |
+ |_____________|_____________|
+"""
+
 # presentacion
-print("football-eleven, a program where you can simulate different football lineups")
+print(greeting)
+print(draw)
+print("a football lineup simulation.")
+
+print('=' * 80)
 
 # [TODO]
 # cargamos los datos reducidos de la liga pero deberiamos preguntarle al usuario que datos quiere cargar
@@ -47,13 +75,16 @@ print("football-eleven, a program where you can simulate different football line
 
 problem = Problem("players-reduced-laliga-2324.csv")
 sg = SolutionGenerator()
+solution = None
 
 # bucle principal
 while True:
     print("What do you want to do?")
+    print("[0] -> Print last solution")
     print("[1] -> Get a random solution")
     print("[2] -> Get a baseline solution")
     print("[3] -> Solution generator perfomance")
+    print("[4] -> Run a genetic algorithm")
     print("[9] -> Exit")
 
     try:
@@ -62,6 +93,9 @@ while True:
         print("Error, not an option!\n")
         continue
 
+    if option == 0: # print las solution
+        if solution: 
+            solution.print()
 
     if option == 1: # Print a random solution
         solution = sg.random_solution(problem)
@@ -69,10 +103,13 @@ while True:
 
     elif option == 2: # Print a baseline solution
         solution = sg.random_solution(problem)
-        solution.print()
+        solution.short_print()
 
     elif option == 3:
         perfomance(problem, sg)
+
+    elif option == 4:
+        solution = genetic_algorithm(problem, sg, gen = 1000)
 
     elif option == 9 or option == 'exit':
         print("Goodbye!")

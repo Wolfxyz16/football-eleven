@@ -9,8 +9,9 @@ class Problem:
 
     Métodos:
         read_players(filename):         Lee el archivo con el nombre filename y carga los jugadores
-        objective_function(solucion):   Dada una solución devuelve el valor que le da.
+        objective_function(solution):   Dada una solución devuelve el valor que le da.
         get_random_player():            Devuelve un jugador aleatorio de su base de jugadores
+        mutate_solution(solution):      Dada una solucion muta un jugador aleatorio por otro de su posición
     """
 
     import random
@@ -92,8 +93,27 @@ class Problem:
         """
 
         # Comprobamos que existan jugadores
-        if len(self.players) == 0: return;
+        if len(self.players) == 0: 
+            raise Exception("Players list is empty.")
 
         id = self.random.randint(0, self.total_players - 1)
 
         return self.players[id]
+
+    def mutate_same_position_solution(self, solution):
+        """
+        Dada una solución cambia un jugador aleatorio por otro de la misma posicion
+        """
+        encontrado = False
+
+        # Es el jugador que tendremos que sustituir
+        banquillo = solution.get_random_player()
+
+        # Buscamos un jugador aleatorio de su misma posicion
+        while not encontrado:
+            new_player = self.get_random_player()
+            # si comparten posicion y el nuevo jugador no esta en la solucion
+            if new_player['position'] == banquillo['position'] and new_player not in solution.lineup:
+                solution.change_players(banquillo, new_player)
+                encontrado = True
+
