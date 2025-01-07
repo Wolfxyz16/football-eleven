@@ -1,1 +1,5 @@
- 
+- [ ] Problema multiobjetivo. Minimizar dinero y maximizar el rating
+    - [ ] Incluir algún algoritmo multiobjetivo
+- [ ] Incluir tests para el correcto funcionamiento del código
+- [ ] Optimizar nuestro hiperparámetros con Optuna. Del algoritmo genético por ejemplo.
+- [ ] Utilizar *numpy* para mejorar el rendimiento
