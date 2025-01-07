@@ -1,3 +1,4 @@
+- [ ] ¿Qué le pasa al algoritmo *baseline*? No funciona :(
 - [ ] Problema multiobjetivo. Minimizar dinero y maximizar el rating
     - [ ] Incluir algún algoritmo multiobjetivo
 - [ ] Incluir tests para el correcto funcionamiento del código
