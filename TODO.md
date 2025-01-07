@@ -1,3 +1,4 @@
+- [ ] `main.py` linea 72, implementar en el menú algún método para cargar el dataset que querramos
 - [ ] ¿Qué le pasa al método `solution_generator.baseline_solution`? No funciona :(
 - [ ] Problema multiobjetivo. Minimizar dinero y maximizar el rating
     - [ ] Incluir algún algoritmo multiobjetivo
