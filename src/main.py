@@ -73,7 +73,8 @@ print('=' * 80)
 # cargamos los datos reducidos de la liga pero deberiamos preguntarle al usuario que datos quiere cargar
 # tenemos que imprimir los archivos del directorio data y luego preguntarle al usuario cual quiere usar [premier o la liga]
 
-problem = Problem("players-reduced-laliga-2324.csv")
+# problem = Problem("players-reduced-laliga-2324.csv")
+problem = Problem("players-2324-good.csv")
 sg = SolutionGenerator()
 solution = None
 
@@ -109,7 +110,11 @@ while True:
         perfomance(problem, sg)
 
     elif option == 4:
+        inicio = time.time()
         solution = genetic_algorithm(problem, sg, gen = 1000)
+        fin = time.time()
+        tiempo_transcurrido = fin - inicio
+        print(f"Tiempo transcurrido: {round(tiempo_transcurrido, 2)} seconds")
 
     elif option == 9 or option == 'exit':
         print("Goodbye!")
