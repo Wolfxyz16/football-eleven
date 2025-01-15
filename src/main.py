@@ -4,6 +4,7 @@ from problem import Problem
 from solution import Solution 
 from solution_generator import SolutionGenerator
 from genetic.genetic import genetic_algorithm
+from multiobjective.nsga2 import nsga2
 
 # TODO: mover este método a otro archivo src/utils.py
 def perfomance(problem, sg):
@@ -73,8 +74,8 @@ print('=' * 80)
 # cargamos los datos reducidos de la liga pero deberiamos preguntarle al usuario que datos quiere cargar
 # tenemos que imprimir los archivos del directorio data y luego preguntarle al usuario cual quiere usar [premier o la liga]
 
-# problem = Problem("players-reduced-laliga-2324.csv")
-problem = Problem("players-2324-good.csv")
+problem = Problem("players-reduced-laliga-2324.csv")
+# problem = Problem("players-2324-good.csv")
 sg = SolutionGenerator()
 solution = None
 
@@ -86,6 +87,7 @@ while True:
     print("[2] -> Get a baseline solution")
     print("[3] -> Solution generator perfomance")
     print("[4] -> Run a genetic algorithm")
+    print("[5] -> Run a multiobjective algorithm (nsga2)")
     print("[9] -> Exit")
 
     try:
@@ -111,10 +113,14 @@ while True:
 
     elif option == 4:
         inicio = time.time()
-        solution = genetic_algorithm(problem, sg, gen = 1000)
+        solution = genetic_algorithm(problem, sg)
         fin = time.time()
         tiempo_transcurrido = fin - inicio
         print(f"Tiempo transcurrido: {round(tiempo_transcurrido, 2)} seconds")
+
+    # NSGA2
+    elif option == 5:
+        nsga2(problem, sg)
 
     elif option == 9 or option == 'exit':
         print("Goodbye!")
