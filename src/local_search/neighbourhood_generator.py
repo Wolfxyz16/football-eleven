@@ -34,7 +34,7 @@ class NeighbourhoodGenerator:
                 if solution.lineup[i]['position'] == new_player['position']:
                     new_solution = copy.deepcopy(solution)
                     new_solution.lineup[i] = new_player
-                    new_solution.update_solution(problem.objective_function)
+                    new_solution.update(problem.objective_function)
                     neighbours.append(new_solution)
             yield neighbours
 
@@ -49,7 +49,7 @@ class NeighbourhoodGenerator:
             for i in range(len(solution.lineup)):
                 new_solution = copy.deepcopy(solution)
                 new_solution.lineup[i] = new_player
-                new_solution.update_solution(problem.objective_function)
+                new_solution.update(problem.objective_function(new_solution.lineup))
                 neighbours.append(new_solution)
             yield neighbours
 

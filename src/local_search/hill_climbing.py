@@ -46,7 +46,6 @@ class HillClimbing():
                 for sol in neighbors:
                     if sol.value > current_sol.value:
                         current_sol = sol
-                        current_sol.update_solution()
                         better_find = True
                         break
                 if better_find:
@@ -64,7 +63,6 @@ class HillClimbing():
                 for sol in neighbors:
                     if sol.value > best_sol.value:
                         best_sol = sol
-                        best_sol.update_solution()
                         better_find = True
 
             if not better_find:
