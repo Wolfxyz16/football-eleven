@@ -36,13 +36,12 @@ class NeighbourhoodGenerator:
             new_player = problem.players[pl]  # Obtener el jugador a insertar en la solución
             # Buscar los vecinos con la misma posición
             for i in range(len(solution.lineup)):
-                if solution.lineup[i]['position'] == new_player['position']:  # Verificar que están en la misma posición
-                    new_solution = copy.deepcopy(solution)  # Crear una copia de la solución actual
-                    new_solution.lineup[i] = new_player  # Realizar el swap de jugadores
-                    new_solution.update(problem.objective_function(new_solution.lineup))  # Actualizar la solución
-                    neighbours.append(new_solution)  # Añadir la nueva solución a la lista de vecinos
-
-        return neighbours  # Devolver la lista completa de soluciones vecinas
+                if solution.lineup[i]['position'] == new_player['position']:
+                    new_solution = copy.deepcopy(solution)
+                    new_solution.lineup[i] = new_player
+                    new_solution.update(problem.objective_function(new_solution.lineup))
+                    neighbours.append(new_solution)
+            yield neighbours
 
     def all_random_neighborhood(self, solution, problem):
         player_id = list(range(0, problem.total_players))
