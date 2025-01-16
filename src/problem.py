@@ -41,9 +41,23 @@ class Problem:
         df = self.pd.read_csv(f"data/{filename}")
         self.players = df.to_dict(orient = "records")
 
+    def get_team_price(self, solution):
+        """
+        Devuelve el costo total de la plantilla
+        """
+        return sum(player['value'] for player in solution.lineup)
+
+
+    def get_team_rating(self, solution):
+        """
+        Devuelve la media de la valoracion de la alineacion
+        """
+        return ( sum(player['rating'] for player in solution.lineup) / 11 )
+
     def objective_function(self, solucion):
         """
-        Por ahora, suma las notas de los jugadores de la solución y la devuelve
+        Calcula la media de las notas de los jugadores de la posicion y si nos hemos pasado del presupuesto máximo sufrimos
+        una penalización.
 
         Args:
             solution (list): Lista de los jugadores (diccionarios) que forman parte de la solución

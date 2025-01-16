@@ -9,10 +9,11 @@ class Solution:
         lineup (list):          Lista de diccionarios con once jugadores pertenecientes a la alineacion
         value (int):            Valor que le da la función objetivo.
         rating_sum (int):       Suma de las notas de la alineación.
-        rating_mean (float):    Media de las notas de la alineación.
+        rating (float):    Media de las notas de la alineación.
         cost (int):             Indica cuánto dinero (€) cuesta la plantilla.
 
     Métodos:
+        update_solution():                              Actualiza los valores rating y cost
         change_players(current_player, new_player):     Recibe un jugador de la solución y lo cambia por el nuevo jugador.
         get_random_player():                            Devuelve un jugador aleatorio de la alineación
         print():                                        Imprime de forma de tabla la solución.
@@ -20,17 +21,22 @@ class Solution:
     """
 
     def __init__(self, lineup, value):
+        assert len(lineup) == 11
         self.lineup = lineup
         self.value = value
         self.rating_sum = 0
-        self.rating_mean = 0
+        self.rating = 0.0
         self.cost = 0
+        self.update(value)
 
-        for player in lineup:
+    def update(self, value = -float('inf')):
+        self.rating_sum = 0
+        self.cost = 0
+        for player in self.lineup:
             self.rating_sum += player["rating"]
             self.cost += player["value"]
-
-        self.rating_mean = self.rating_sum / 11
+        self.rating = self.rating_sum / 11
+        self.value = value
 
     def change_players(self, current_player, new_player):
         """
@@ -43,6 +49,7 @@ class Solution:
         for player in self.lineup:
             if player['id'] == current_player['id']:
                 player = new_player
+                self.update()
                 return 0
         raise Exception(f"{current_player.name} is not in the squad.")
 
@@ -68,21 +75,17 @@ class Solution:
 
         formacion = {'G': 0, 'D': 0, 'M': 0, 'F': 0}
 
-        coste = 0
-        nota = 0
         print('-' * 88)
         print(f"| {'NOMBRE':^30} | {'NOTA':^4} | {'POS':^3} | {'PRECIO € ':^15} | {'EQUIPO':^20} |")
         print('-' * 88)
 
         for player in solution:
-            coste += player["value"]
-            nota += player["rating"]
             formacion[player["position"]] += 1
             print(f'| {player["name"]:^30} | {player["rating"]:^4} | {player["position"]:^3} | {player["value"]:^15,} | {player["team"]:^20} |')
 
         print('-' * 88)
-        print(f'Coste total de la plantilla {self.cost:,} €')
-        print(f'Media de la plantilla {round(self.rating_mean, 2)}')
+        print(f'Coste total de la plantilla {self.cost} €')
+        print(f'Media de la plantilla {round(self.rating, 2)}')
         print(f'VALOR de la plantilla {round(self.value, 2)}')
         print(f'Formación: {formacion["D"]}-{formacion["M"]}-{formacion["F"]}  \n')
 
@@ -102,3 +105,9 @@ class Solution:
 
     def __gt__(self, other):
         return self.value > other.value
+
+    def __str__(self):
+        return f'{self.rating:.2f} {self.cost}€'
+
+    def __repr__(self):
+        return f'{self.rating:.2f} {self.cost}€'

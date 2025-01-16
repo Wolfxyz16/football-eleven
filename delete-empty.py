@@ -1,3 +1,6 @@
+"""
+Este es un pequeño script que sirve para eliminar las filas que contengan algún elemento vacio de un archivo csv
+"""
 import csv
 
 # Ruta del archivo CSV

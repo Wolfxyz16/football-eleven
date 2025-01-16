@@ -1,3 +1,5 @@
 .git
-*/__pycache__
+__pycache__/
+__init__.py
 src/genetic/__pycache__
+env.sh
