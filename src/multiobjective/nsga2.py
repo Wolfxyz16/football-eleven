@@ -8,9 +8,9 @@ from genetic.genetic import one_point_crossover, manager_crossover, simple_cross
 def dominate(sol1, sol2):
     """ Returns boolean indicating if the sol1 dominates over the sol2 """
     """ sol1 domina a sol2 si es mejor o igual en todas las soluciones y al menos en una estrictamente mejor """
-    if sol1.cost >= sol2.cost and sol1.rating > sol2.rating:
+    if sol1.cost <= sol2.cost and sol1.rating > sol2.rating:
         return True
-    elif sol1.cost > sol2.cost and sol1.rating >= sol2.rating:
+    elif sol1.cost <= sol2.cost and sol1.rating >= sol2.rating:
         return True
     else:
         return False
