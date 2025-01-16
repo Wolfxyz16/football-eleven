@@ -3,7 +3,7 @@
 import random
 from problem import Problem
 from population import Population
-from genetic.genetic import one_point_crossover, manager_crossover
+from genetic.genetic import one_point_crossover, manager_crossover, simple_crossover
 
 def dominate(sol1, sol2):
     """ Returns boolean indicating if the sol1 dominates over the sol2 """
@@ -80,7 +80,7 @@ def selection(population):
 def nsga2(problem, solution_generator):
 
     POP_SIZE = 100
-    MAX_GEN = 50
+    MAX_GEN = 10000
     MUTANT_PROB = 0.1
 
     # Inicializamos la poblacion
@@ -107,15 +107,14 @@ def nsga2(problem, solution_generator):
 
         for index_parent1, index_parent2 in zip(parents[::2], parents[1::2]):
             parent1, parent2 = population.solutions[index_parent1], population.solutions[index_parent2]
-            offspring1, offspring2 = manager_crossover(parent1.lineup, parent2.lineup, problem)
+            childs = simple_crossover(parent1.lineup, parent2.lineup, problem)
 
             # Lanzamos un dado para ver si tenemos que mutar
             if random.random() > MUTANT_PROB:
-                problem.mutate_same_position_solution(offspring1)
-                problem.mutate_same_position_solution(offspring2)
+                for child in childs:
+                    problem.mutate_same_position_solution(child)
 
-            offsprings.append(offspring1)
-            offsprings.append(offspring2)
+            offsprings.extend(childs)
 
         # 5. Creation of next gen
 
@@ -136,4 +135,4 @@ def nsga2(problem, solution_generator):
         population = new_pop
         gen_no += 1
 
-    population.best_solution().print()
+    return population.best_solution()
