@@ -39,11 +39,3 @@ Dentro de la carpeta `src` se encuentran los archivos donde ejecutamos la lógic
 ## Finalidad
 
 Programa creado por alumnos de la EHU/UPV para la asignatura de *heurísticos de búsqueda*.
-
-- David Laguillo Alonso
-
-- Ander Amigorena Montes
-
-- Sergio Hernández Redondo
-
-- [Yeray Li Loaiza](https://github.com/Wolfxyz16)
